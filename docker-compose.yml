@@ -27,8 +27,8 @@ services:
   gateway:
     depends_on:
       - backend
-    env_file: .env
     build: ./nginx/
+    env_file: .env
     ports:
       - 9000:80
     volumes:

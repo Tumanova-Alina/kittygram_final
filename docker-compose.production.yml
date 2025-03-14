@@ -1,7 +1,7 @@
 volumes:
-  pg_data:
-  static:
-  media:
+  pg_data_prod:
+  static_prod:
+  media_prod:
 
 
 services:
@@ -9,13 +9,13 @@ services:
     image: postgres:13.10
     env_file: .env
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_prod:/var/lib/postgresql/data
   backend:
     image: alina124/kittygram_backend
     env_file: .env
     volumes:
-      - static:/static
-      - media:/media
+      - static_prod:/static
+      - media_prod:/media
     depends_on:
       - db
   frontend:
@@ -23,7 +23,7 @@ services:
     image: alina124/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static
+      - static_prod:/static
   gateway:
     depends_on:
       - backend
@@ -32,5 +32,5 @@ services:
     ports:
       - 9000:80
     volumes:
-      - static:/static
-      - media:/media
+      - static_prod:/static
+      - media_prod:/media
